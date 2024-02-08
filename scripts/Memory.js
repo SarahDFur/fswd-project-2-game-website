@@ -4,6 +4,20 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 
+document.querySelector('.reset-button').addEventListener('click', resetGame);
+
+function resetGame() {
+    cards.forEach(card => {
+        card.classList.remove('flip');
+    });
+    setTimeout(() => {
+        shuffle();
+        [hasFlippedCard, lockBoard] = [false, false];
+        [firstCard, secondCard] = [null, null];
+        cards.forEach(card => card.addEventListener('click', flipCard));
+    }, 500);
+}
+
 function flipCard() {
     if (lockBoard) return;
     if (this === firstCard) return;

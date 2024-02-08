@@ -28,6 +28,8 @@ body {
     transform-style: preserve-3d;
     transition: transform .5s;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+    transition: transform 0.5s, box-shadow 0.5s;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
 }
 
 .memory-card:active {
@@ -37,6 +39,7 @@ body {
 
 .memory-card.flip {
     transform: rotateY(180deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
 .front-face,
@@ -48,8 +51,25 @@ body {
     border-radius: 5px;
     background: #1C7CCC;
     backface-visibility: hidden;
+    transition: transform 0.5s;
 }
 
 .front-face {
     transform: rotateY(180deg);
+}
+
+.reset-button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.reset-button:hover {
+    background-color: #2980b9;
 }
