@@ -1,4 +1,6 @@
 const cards = document.querySelectorAll('.memory-card');
+const matchSound = new Audio("../sounds/match.mp3");
+const winSound = new Audio('../sounds/win.mp3');
 
 let hasFlippedCard = false;
 let lockBoard = false;
@@ -41,13 +43,22 @@ function flipCard() {
 function checkForMatch() {
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
 
-    isMatch ? disableCards() : unflipCards();
+    if (isMatch) {
+        disableCards();
+        matchSound.play(); // play match sound
+    } else {
+        unflipCards();
+    }
 }
 
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
 
+    const allFlipped = Array.from(document.querySelectorAll('.memory-card')).every(card => card.classList.contains('flip'));
+    if (allFlipped) {
+        winSound.play(); // play win sound
+    }
     resetBoard();
 }
 
