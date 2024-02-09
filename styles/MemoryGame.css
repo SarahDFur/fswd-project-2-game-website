@@ -10,6 +10,13 @@ body {
     background: #060AB2;
 }
 
+.score-panel {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .memory-game {
     width: 640px;
     height: 640px;
@@ -72,4 +79,9 @@ body {
 
 .reset-button:hover {
     background-color: #2980b9;
+}
+
+.container {
+    display: grid;
+    place-items: center;
 }

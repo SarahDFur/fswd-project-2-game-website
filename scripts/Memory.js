@@ -1,10 +1,11 @@
 const cards = document.querySelectorAll('.memory-card');
-const matchSound = new Audio("../sounds/match.mp3");
-const winSound = new Audio('../sounds/win.mp3');
+const matchSound = new Audio("../data/sound/match.mp3");
+const winSound = new Audio('../data/sound/win.mp3');
 
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
+let score = 0;
 
 document.querySelector('.reset-button').addEventListener('click', resetGame);
 
@@ -18,6 +19,11 @@ function resetGame() {
         [firstCard, secondCard] = [null, null];
         cards.forEach(card => card.addEventListener('click', flipCard));
     }, 500);
+}
+
+function updateScore(points) {
+    score += points; // עדכון הניקוד בהתאם לפעולה
+    document.getElementById('score').textContent = score; // עדכון התצוגה של הניקוד
 }
 
 function flipCard() {
@@ -45,9 +51,11 @@ function checkForMatch() {
 
     if (isMatch) {
         disableCards();
+        updateScore(10);
         matchSound.play(); // play match sound
     } else {
         unflipCards();
+        updateScore(-1);
     }
 }
 
