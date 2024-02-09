@@ -9,17 +9,28 @@ let score = 0;
 
 document.querySelector('.reset-button').addEventListener('click', resetGame);
 
+function shuffle() {
+    cards.forEach(card => {
+        let randomPos = Math.floor(Math.random() * 12);
+        card.style.order = randomPos;
+    });
+}
+
 function resetGame() {
+    shuffle();
     cards.forEach(card => {
         card.classList.remove('flip');
+        card.removeEventListener('click', flipCard); // 
+        card.addEventListener('click', flipCard); //
     });
     setTimeout(() => {
-        shuffle();
         [hasFlippedCard, lockBoard] = [false, false];
         [firstCard, secondCard] = [null, null];
-        cards.forEach(card => card.addEventListener('click', flipCard));
-    }, 500);
+        score = 0; // אפס גם את הניקוד
+        updateScore(0); // עדכן את התצוגה של הניקוד
+    }, 100);
 }
+
 
 function updateScore(points) {
     score += points; // עדכון הניקוד בהתאם לפעולה
@@ -86,11 +97,6 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
 }
 
-(function shuffle() {
-    cards.forEach(card => {
-        let randomPos = Math.floor(Math.random() * 12);
-        card.style.order = randomPos;
-    });
-})();
+
 
 cards.forEach(card => card.addEventListener('click', flipCard));
