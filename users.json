@@ -1,0 +1,21 @@
+{
+    "users":
+    [
+        {
+            "name": "Sarah",
+            "email": "sarah@gmail.com",
+            "password": "1234",
+            "lastSeen": "10/02/2024",
+            "active": "True",
+            "medals": ["MVP Flappy", "Memory master"]
+        },
+        {
+            "name": "Hemdat",
+            "email": "hemdat@gmail.com",
+            "password": "1234",
+            "lastSeen": "10/02/2024",
+            "active": "True",
+            "medals": ["MVP Flappy", "Memory master"]
+        }
+    ]
+}
