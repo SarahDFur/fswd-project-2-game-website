@@ -34,21 +34,25 @@ function addUser(name, email, password) {
             name,
             email,
             password,
-            score: 0
+            lastSeen: new Date().toISOString(),
+            active: true,
+            memoryGameScore: 0, // ציון משחק זיכרון
+            flappyBirdScore: 0, // ציון פלאפי בירד
+            rockPaperScissorsScore: 0 // ציון אבן נייר ומספריים
         };
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
         alert("User registered successfully.");
-        toggleForm();
     } else {
         alert("User name or email already exists. Please use different information.");
     }
 }
 
+
 function signIn(email, password) {
     const user = users.find(user => user.email === email && user.password === password);
     if (user) {
-        alert(`Welcome back, ${user.name}! Your high score is ${user.score}.`);
+        alert(`Welcome back, ${user.name}! You last logged in on ${new Date(user.lastSeen).toLocaleString()}.`);
     } else {
         alert("Invalid email or password.");
     }
