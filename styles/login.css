@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open-sans', sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(255, 218, 96, 0.4), rgba(205, 96, 255, 0.6)), url(../images/login-bg.png);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.form-box {
+    width: 90%;
+    max-width: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 50px 60px 70px;
+    text-align: center;
+}
+
+.form-box h1 {
+    font-size: 30px;
+    margin-bottom: 60px;
+    color: rgb(50, 12, 87);
+    position: relative;
+}
+
+.form-box h1::after { /* pseudo element*/
+    content: '';
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: rgb(50, 12, 87);
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+/* align input fields to center */
+.input-field {
+    background: #eaeaea;
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    /* will make a transition and hide name field */
+    max-height: 65px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+}
+
+input {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    padding: 18px;
+}
+
+.input-field span { /* icons alignement*/
+    margin-left: 15px;
+    color: #999;
+}
+
+form p {
+    text-align: left;
+    font-size: 13px;
+}
+
+form p a {
+    text-decoration: none;
+    color: rgb(50, 12, 87);
+}
+
+/* sign up & sign in buttons */
+.btn-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-field button {
+    flex-basis: 48%;
+    background-color: rgb(50, 12, 87);
+    color: #fff;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+/* space between form and buttons */
+.input-group {
+    height: 280px;
+}
+
+/* disable */
+.btn-field button.disable {
+    background-color: #eaeaea;
+    color: #555;
+}
