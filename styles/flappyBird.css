@@ -1,26 +1,86 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    background: #600;
+}
+/* game display : */
 .game-container {
     width: 500px;
     height: 730px;
     position: absolute; /* position based on parent */
+    /* center game display on screen ↓ */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+    /* borders: */
+.border-left {
+    width: 60px;
+    height: 790px;
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 36%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.border-right {
+    width: 60px;
+    height: 790px;
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    right: 33%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.border-top {
+    width: 500px;
+    height: 60px;
+    position: absolute;
+    background-color: white;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.border-bottom {
+    width: 500px;
+    height: 60px;
+    position: absolute;
+    background-color: white;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+/* end of border styling ↑ */
 
 .sky {
-    background-color: blue;
+    background-image: url(../images/flappyBird/fb-game-background.png);
     width: 500px;
     height: 580px;
     position: absolute;
 }
 
 .ground {
-    background-color: brown;
+    background-image: url(../images/flappyBird/bottom-background.png);
     width: 500px;
     height: 150px;
     position: absolute;
     top: 580px; /* position from top of parent element */
+    z-index: 1;
 }
 
 .bird {
-    background-color: yellow;
+    background-image: url(../images/flappyBird/flappy-bird.png);
+    /* background-color: yellow; */
     position: absolute;
     width: 60px;
     height: 45px;
@@ -28,9 +88,19 @@
 
 /* styling obstacles */
 .obstacle {
-    /* background-image: url('/images/flappyBird/flappybird-pipe.png'); */
-    background-color: green;
+    background-image: url(../images/flappyBird/flappybird-pipe.png);
+    /* background-color: green; */
     width: 60px;
     height: 300px;
     position: absolute;
+}
+
+.topObstacle {
+    background-image: url(../images/flappyBird/flappybird-pipe.png);
+    /* background-color: green; */
+    transform: rotate(180deg);
+    width: 60px;
+    height: 300px;
+    position: absolute;
+    
 }
