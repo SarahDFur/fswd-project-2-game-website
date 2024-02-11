@@ -5,6 +5,8 @@ let nameField = document.getElementById("nameField");
 let emailField = document.getElementById("emailField");
 let passwordField = document.getElementById("passwordField");
 let title = document.getElementById("title");
+let loginAttempts = 0;
+
 
 signupBtn.addEventListener('click', function() {
     const name = nameField.value;
@@ -30,11 +32,14 @@ signinBtn.addEventListener('click', function() {
 function addUser(name, email, password) {
     const userExists = users.some(user => user.email === email);
     if (!userExists) {
+        const now = new Date();
+        const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes
         const newUser = {
             name,
             email,
             password,
             lastSeen: new Date().toISOString(),
+            sessionExpiration: expirationTime.toISOString(),
             active: true,
             memoryGameScore: 0, // ציון משחק זיכרון
             flappyBirdScore: 0, // ציון פלאפי בירד
@@ -52,8 +57,20 @@ function addUser(name, email, password) {
 function signIn(email, password) {
     const user = users.find(user => user.email === email && user.password === password);
     if (user) {
+        const now = new Date();
+        const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes
+        user.sessionExpiration = expirationTime.toISOString(); // update session expiration
+        loginAttempts = 0; // reset login attempts
+
         alert(`Welcome back, ${user.name}! You last logged in on ${new Date(user.lastSeen).toLocaleString()}.`);
+        user.lastSeen = now.toISOString(); // update last seen
+        localStorage.setItem('users', JSON.stringify(users));
     } else {
+        loginAttempts++; // increment login attempts
+        if (loginAttempts >= 3) {
+            alert("Too many failed login attempts. Please try again later or verify you're not a robot.");
+            return;
+        }
         alert("Invalid email or password.");
     }
 }

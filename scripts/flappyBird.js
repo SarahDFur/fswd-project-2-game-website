@@ -29,13 +29,13 @@ let gameTimerId = setInterval(startGame, 20); // invoke every 20ms
 
 // jumping - fight against gravity
 function control(e) {
-    if(e.keyCode === 38) // if it's the up arrow key
+    if (e.keyCode === 38) // if it's the up arrow key
         jump();
-} 
+}
 
 function jump() {
     // limit bird from leaving grid
-    if(birdBottom < 500) { // able to add
+    if (birdBottom < 500) { // able to add
         birdBottom += 50;
     }
     bird.style.bottom = birdBottom + 'px';
@@ -46,14 +46,14 @@ document.addEventListener('keydown', control);
 
 // Obstacles - Yippie
 function generateObstacle() {
-    
+
     let obstacleLeft = 500;
     let randomHeight = Math.random() * 60;
     let obstacleBottom = randomHeight; // form the bottom of the game grid
-    
+
     const obstacle = document.createElement('div');
     const topObstacle = document.createElement('div');
-    if(!isGameOver) {
+    if (!isGameOver) {
         obstacle.classList.add('obstacle'); // add only if not over
         topObstacle.classList.add('topObstacle');
     }
@@ -71,15 +71,15 @@ function generateObstacle() {
         obstacleLeft -= 2;
         obstacle.style.left = obstacleLeft + 'px';
         topObstacle.style.left = obstacleLeft + 'px';
-        if(obstacleLeft === -60) { // when the entire obstacle is out of view
+        if (obstacleLeft === -60) { // when the entire obstacle is out of view
             clearInterval(timerId);
             gameDisplay.removeChild(obstacle); // remove from display
             gameDisplay.removeChild(topObstacle);
         }
-        if(
-            obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 && 
+        if (
+            obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 &&
             (birdBottom < obstacleBottom + 153 ||
-            birdBottom > obstacleBottom + gap -200) ||
+                birdBottom > obstacleBottom + gap - 200) ||
             birdBottom === 0) { // make bird and obstacles stop
             gameOver();
             clearInterval(timerId); // obstacle stops on impact
@@ -90,7 +90,7 @@ function generateObstacle() {
     let timerId = setInterval(moveObstacle, 20);
 
     // generate a new obstacle of random height every 3 seconds ↓
-    if(!isGameOver) setTimeout(generateObstacle, 3000);
+    if (!isGameOver) setTimeout(generateObstacle, 3000);
 }
 generateObstacle();
 

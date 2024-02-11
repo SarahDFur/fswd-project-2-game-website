@@ -8,6 +8,9 @@ body {
     height: 100vh;
     display: flex;
     background: #060AB2;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .score-panel {
@@ -27,15 +30,13 @@ body {
 }
 
 .memory-card {
-    width: calc(25% - 10px);
-    height: calc(33.333% - 10px);
+    width: calc(25% - 25px);
+    height: calc(33.333% - 25px);
     margin: 5px;
     position: relative;
     transform: scale(1);
     transform-style: preserve-3d;
     transition: transform .5s;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
-    transition: transform 0.5s, box-shadow 0.5s;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -53,9 +54,9 @@ body {
 .back-face {
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 5px;
     position: absolute;
-    border-radius: 5px;
+    border-radius: 1px;
     background: #1C7CCC;
     backface-visibility: hidden;
     transition: transform 0.5s;
@@ -65,16 +66,29 @@ body {
     transform: rotateY(180deg);
 }
 
-.reset-button {
-    padding: 10px 20px;
-    margin-top: 20px;
-    font-size: 16px;
+.buttons-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.reset-button,
+.save-score-button {
+    padding: 15px 20px;
+    margin: 5px;
+    font-size: 20px;
     cursor: pointer;
     background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     outline: none;
+    transition: background-color 0.3s;
 }
 
 .reset-button:hover {
@@ -83,5 +97,24 @@ body {
 
 .container {
     display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .memory-game {
+        width: 90%;
+        height: auto;
+    }
+    .memory-card {
+        width: calc(33.333% - 10px);
+        height: calc(25% - 10px);
+    }
+    .reset-button,
+    .save-score-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
 }
