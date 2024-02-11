@@ -5,6 +5,8 @@ let nameField = document.getElementById("nameField");
 let emailField = document.getElementById("emailField");
 let passwordField = document.getElementById("passwordField");
 let title = document.getElementById("title");
+let loginAttempts = 0;
+
 
 signupBtn.addEventListener('click', function() {
     const name = nameField.value;
@@ -52,8 +54,14 @@ function addUser(name, email, password) {
 function signIn(email, password) {
     const user = users.find(user => user.email === email && user.password === password);
     if (user) {
+        loginAttempts = 0; // reset login attempts
         alert(`Welcome back, ${user.name}! You last logged in on ${new Date(user.lastSeen).toLocaleString()}.`);
     } else {
+        loginAttempts++; // increment login attempts
+        if (loginAttempts >= 3) {
+            alert("Too many failed login attempts. Please try again later or verify you're not a robot.");
+            return;
+        }
         alert("Invalid email or password.");
     }
 }
