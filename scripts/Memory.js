@@ -26,15 +26,15 @@ function resetGame() {
     setTimeout(() => {
         [hasFlippedCard, lockBoard] = [false, false];
         [firstCard, secondCard] = [null, null];
-        score = 0; // אפס גם את הניקוד
-        updateScore(0); // עדכן את התצוגה של הניקוד
+        score = 0; // 
+        updateScore(0); // 
     }, 100);
 }
 
 
 function updateScore(points) {
-    score += points; // עדכון הניקוד בהתאם לפעולה
-    document.getElementById('score').textContent = score; // עדכון התצוגה של הניקוד
+    score += points; //
+    document.getElementById('score').textContent = score; //
 }
 
 function flipCard() {
