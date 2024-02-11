@@ -1,4 +1,9 @@
-// document.addEventListener('DOMContentLoader', () => {
+const score = JSON.parse(localStorage.getItem('score')) || {
+    wins: 0,
+    losses: 0,
+    ties: 0
+};
+
 const bird = document.querySelector('.bird');
 const gameDisplay = document.querySelector('.game-container');
 const ground = document.querySelector('.ground');
@@ -7,8 +12,9 @@ const ground = document.querySelector('.ground');
 // px changes
 let birdLeft = 220;
 let birdBottom = 100;
-let gravity = 2;
+let gravity = 3;
 let isGameOver = false;
+let gap = 430;
 
 // game
 function startGame() {
@@ -17,30 +23,25 @@ function startGame() {
     bird.style.left = birdLeft + 'px';
 }
 
-function loadUserScore() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser) {
-        document.getElementById('score').textContent = currentUser.score;
-    }
-}
-
-let gameTimerId = setInterval(startGame(), 20); // invoke every 20ms
+let gameTimerId = setInterval(startGame, 20); // invoke every 20ms
 // clearInterval(timerId); //stop the interval
 
 
 // jumping - fight against gravity
 function control(e) {
-    if (e.keycode === 32) // if it's the spacebar
+    if (e.keyCode === 38) // if it's the up arrow key
         jump();
 }
 
 function jump() {
     // limit bird from leaving grid
-    if (birdBottom < 500) // able to add
+    if (birdBottom < 500) { // able to add
         birdBottom += 50;
+    }
     bird.style.bottom = birdBottom + 'px';
+    console.log(birdBottom);
 }
-document.addEventListener('keyup', control);
+document.addEventListener('keydown', control);
 
 
 // Obstacles - Yippie
@@ -51,28 +52,34 @@ function generateObstacle() {
     let obstacleBottom = randomHeight; // form the bottom of the game grid
 
     const obstacle = document.createElement('div');
-    if (!isGameOver) obstacle.classList.add('obstacle'); // add only if not over
+    const topObstacle = document.createElement('div');
+    if (!isGameOver) {
+        obstacle.classList.add('obstacle'); // add only if not over
+        topObstacle.classList.add('topObstacle');
+    }
     // insert obstacle into the game display
     gameDisplay.appendChild(obstacle);
-
+    gameDisplay.appendChild(topObstacle);
     // change position of obstacle
     obstacle.style.left = obstacleLeft + 'px';
+    topObstacle.style.left = obstacleLeft + 'px';
     obstacle.style.bottom = obstacleBottom + 'px';
-
+    topObstacle.style.bottom = obstacleBottom + gap + 'px';
 
     // moving obstacle from right to left
     function moveObstacle() {
         obstacleLeft -= 2;
-        obstacle.style.left = obstacleLeft;
-
+        obstacle.style.left = obstacleLeft + 'px';
+        topObstacle.style.left = obstacleLeft + 'px';
         if (obstacleLeft === -60) { // when the entire obstacle is out of view
             clearInterval(timerId);
             gameDisplay.removeChild(obstacle); // remove from display
+            gameDisplay.removeChild(topObstacle);
         }
-
         if (
-            obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 ||
-            birdBottom < obstacleBottom + 153 ||
+            obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 &&
+            (birdBottom < obstacleBottom + 153 ||
+                birdBottom > obstacleBottom + gap - 200) ||
             birdBottom === 0) { // make bird and obstacles stop
             gameOver();
             clearInterval(timerId); // obstacle stops on impact
@@ -80,7 +87,7 @@ function generateObstacle() {
     }
 
     // timer for moving obstacles
-    let timerId = setInterval(moveObstacle, 100);
+    let timerId = setInterval(moveObstacle, 20);
 
     // generate a new obstacle of random height every 3 seconds ↓
     if (!isGameOver) setTimeout(generateObstacle, 3000);
@@ -91,6 +98,5 @@ generateObstacle();
 function gameOver() {
     clearInterval(gameTimerId);
     isGameOver = true;
-    document.removeEventListener('keyup', control);
+    document.removeEventListener('keydown', control);
 }
-//});
