@@ -24,11 +24,13 @@ function startGame() {
 let gameTimerId = setInterval(startGame, 20); // invoke every 20ms
 // clearInterval(timerId); //stop the interval
 
-
 // jumping - fight against gravity
 function control(e) {
     if (e.keyCode === 38) // if it's the up arrow key
         jump();
+    if (e.key === 'r') {
+        resetGame();
+    }
 }
 
 function jump() {
@@ -102,6 +104,8 @@ function gameOver() {
     isGameOver = true;
     document.removeEventListener('keydown', control);
     localStorage.setItem('score', JSON.stringify(score));
+    let help = localStorage.getItem('score');
+    console.log("stored score:" + help);
     gameSound.pause();
 }
 
@@ -115,11 +119,9 @@ function updateScore(obstacleLeft) {
         document.getElementById('score').innerHTML = score;
         return;
     }
-    
-    // let canvas = document.getElementById("score-window");
-    // let ctx = canvas.getContext("2d");
-    // ctx.font = "16px Arial";
-    // ctx.fillStyle = "#0095DD";
-    // ctx.fillText(`Score: ${score}`, 8, 20);
 }
 
+// reset game
+function resetGame() {
+    
+}
