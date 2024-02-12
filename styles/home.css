@@ -4,42 +4,132 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f06, #48f, #fa0);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
 }
 
+
 /* Float four columns side by side */
+
 .column {
     float: left;
     width: 25%;
     padding: 0 10px;
 }
 
+
 /* Remove extra left and right margins, due to padding in columns */
+
 .row {
     margin: 0 -5px;
 }
 
+
 /* Clear floats after the columns */
+
 .row:after {
     content: "";
     display: table;
     clear: both;
 }
 
+
 /* Style the counter cards */
+
 .card {
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-    padding: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /*thisaddsthe"card"effect*/
+    padding: 5px;
     text-align: center;
-    background-color: #f1f1f1;
+    background-color: #d8d8d8a8;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 240px;
+    height: 320px;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.card a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+}
+
+.game-title {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 img {
-    width: 100px;
+    width: 60%;
+    height: auto;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
 }
 
+.card:hover img {
+    transform: rotate(5deg);
+}
+
+.fun-world-title {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 60px;
+    text-align: center;
+    background: -webkit-linear-gradient(45deg, #f06, #48f);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+
+/* Keyframe for background animation */
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
 /* Responsive columns - one column layout (vertical) on small screens */
+
 @media screen and (max-width: 600px) {
     .column {
         width: 100%;

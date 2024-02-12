@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../styles/home.css">
-        <link rel="stylesheet" href="../styles/navbar.css">
-        <script defer src="../scripts/theme.js"></script>
-        <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
-        rel="stylesheet"
-        />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    </head>
-    <body> 
-        <nav class="navbar">
-            <ul class="navbar-nav">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <script defer src="../scripts/theme.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+</head>
+
+<body>
+    <div class="fun-world-title">Fun World!</div>
+
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <!-- logo -->
+            <li class="logo">
                 <!-- logo -->
-                <li class="logo">
-                    <!-- logo -->
-                    <a href="#" class="nav-link">
-                        <span class="link-text logo-text">Game Hub</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <span
-                        viewBox="0 0 512 512" fill="currentColor" class="material-symbols-outlined">
+                <a href="#" class="nav-link">
+                    <span class="link-text logo-text">Game Hub</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <span viewBox="0 0 512 512" fill="currentColor" class="material-symbols-outlined">
                             person
                         </span>
 
-                        <!-- <span class="link-text">Month</span> -->
-                    </a>
-                </li>
-                <!-- <li class="nav-item">
+                    <!-- <span class="link-text">Month</span> -->
+                </a>
+            </li>
+            <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <span class="material-symbols-outlined">
                             calendar_today
@@ -55,91 +56,82 @@
                         <span class="link-text">Todo List</span>
                     </a>
                 </li> -->
-                
-                   
-                <!-- theme -->
-                <li class="nav-item" id="themeButton">
-                    <a href="#" class="nav-link">
-                        <span id="lightIcon" aria-hidden="true" data-prefix="fad" class="material-symbols-outlined theme-icon">
+
+
+            <!-- theme -->
+            <li class="nav-item" id="themeButton">
+                <a href="#" class="nav-link">
+                    <span id="lightIcon" aria-hidden="true" data-prefix="fad" class="material-symbols-outlined theme-icon">
                             light_mode
                         </span>
-                        <!-- <span class="link-text">Todo List</span> -->
-                        <span id="darkIcon" aria-hidden="true" data-prefix="fad" class="material-symbols-outlined theme-icon">
+                    <!-- <span class="link-text">Todo List</span> -->
+                    <span id="darkIcon" aria-hidden="true" data-prefix="fad" class="material-symbols-outlined theme-icon">
                             dark_mode
                         </span>
-                        <span class="link-text">Theme</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="row">
-            <div class="column">
-                <div class="card">
-                    <a href="./flappyBird.html">
-                        <img src="../images/cover-icons/flappyBird.png">
-                        flappy bird
-                    </a>
-                </div>
+                    <span class="link-text">Theme</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="../images/cover-icons/flappyBird.png" alt="Flappy Bird">
+                <a href="./flappyBird.html" class="game-title">Flappy Bird</a>
             </div>
-            <div class="column">
-                <div class="card">
-                    <a href="./MemoryGame.html">
-                        <img src="../images/cover-icons/memory.png">
-                        Memory Madness
-                    </a>
-                </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <img src="../images/cover-icons/memory.png" alt="Memory Madness">
+                <a href="./MemoryGame.html" class="game-title">Memory Madness</a>
             </div>
-            <div class="column">
-                <div class="card">
-                    <a href="./rock-paper-scissors.html">
-                        <img src="../images/cover-icons/rock-paper-scissors.png">
-                        Rock Paper Scissors
-                    </a>
-                </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <a href="./rock-paper-scissors.html">
+                    <img src="../images/cover-icons/rock-paper-scissors.png"> Rock Paper Scissors
+                </a>
             </div>
-            <div class="column">
-                <div class="card">
-                    <a>
-                        <img src="../images/cover-icons/pacman.png">
-                        Pacman
-                    </a>
-                </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <a>
+                    <img src="../images/cover-icons/pacman.png"> Pacman
+                </a>
             </div>
-          </div>
-        <div class="row">
-            <div class="column">
-                <div class="card">
-                    <a href="#">
-                        <img src="../images/cover-icons/mario.png">
-                        Mario
-                    </a>
-                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <a href="#">
+                    <img src="../images/cover-icons/mario.png"> Mario
+                </a>
             </div>
-            <div class="column">
-                <div class="card">
-                    <a href="#">
-                        <img src="../images/cover-icons/pokemon-red.jpg">
-                        Pokemon Red
-                    </a>
-                </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <a href="#">
+                    <img src="../images/cover-icons/pokemon-red.jpg"> Pokemon Red
+                </a>
             </div>
-            <div class="column">
-                <div class="card">
-                    <a href="#">
-                        <img src="../images/cover-icons/zelda.png">
-                        Zelda
-                    </a>
-                </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <a href="#">
+                    <img src="../images/cover-icons/zelda.png"> Zelda
+                </a>
             </div>
-            <div class="column">
-                <div class="card">
-                    <a>
-                        <img src="../images/cover-icons/fnf.png">
-                        FNF
-                    </a>
-                </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <a>
+                    <img src="../images/cover-icons/fnf.png"> FNF
+                </a>
             </div>
-          </div>
-    </body>
-    <script src="../scripts/tabs.js"></script>
+        </div>
+    </div>
+</body>
+<script src="../scripts/tabs.js"></script>
+
 </html>
