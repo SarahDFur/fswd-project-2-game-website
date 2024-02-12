@@ -8,44 +8,72 @@ let firstCard, secondCard;
 let score = 0;
 
 document.querySelector('.reset-button').addEventListener('click', resetGame);
+document.querySelector('.save-score-button').addEventListener('click', saveUserScore);
+setInterval(checkSessionExpiration, 1000);
+
 
 function getUserFromLocalStorage() {
-    const user = localStorage.getItem('currentUser');
-    return user ? JSON.parse(user) : null;
+    try {
+        const userJson = localStorage.getItem('currentUser');
+        return userJson ? JSON.parse(userJson) : null;
+    } catch (e) {
+        console.log(e)
+        window.location.href = 'login.html';
+    }
 }
 
 // Load user score from local storage
 function loadUserScore() {
-    const user = getUserFromLocalStorage();
-    if (user && user.memoryGameScore !== undefined) {
-        score = user.memoryGameScore;
-        console.log(score);
+    const currentUser = getUserFromLocalStorage();
+    if (currentUser && currentUser.memoryGameScore !== undefined) {
+        score = currentUser.memoryGameScore;
         document.getElementById('score').textContent = score;
+    } else {
+        console.log('No score found for current user or current user is not defined.');
     }
 }
+
 
 function saveUserScore() {
-    const user = getUserFromLocalStorage();
-    if (user) {
-        user.memoryGameScore = score; // Update the score in the user object
-        // Find and update the user in the users array in localStorage
-        let users = JSON.parse(localStorage.getItem('users')) || [];
-        const userIndex = users.findIndex(u => u.email === user.email);
-        if (userIndex !== -1) {
-            users[userIndex] = user; // Update the user in the array
-            localStorage.setItem('users', JSON.stringify(users)); // Save the updated array
-            localStorage.setItem('currentUser', JSON.stringify(user)); // Update currentUser
+    let currentUser = getUserFromLocalStorage(); // טען את המשתמש הנוכחי מ-localStorage
+    if (!currentUser) {
+        console.error('No current user found.');
+        return;
+    }
+
+    currentUser.memoryGameScore = score; // עדכון ניקוד המשחק של המשתמש הנוכחי
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    const userIndex = users.findIndex(user => user.email === currentUser.email);
+    if (userIndex !== -1) {
+        users[userIndex] = currentUser; // עדכון המשתמש במערך המשתמשים
+    } else {
+        console.error('Current user not found in users array.');
+        return;
+    }
+
+    // שמירה מחדש של המשתמש הנוכחי ומערך המשתמשים ב-localStorage
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
+function checkSessionExpiration() {
+    try {
+        saveUserScore()
+        const user = getUserFromLocalStorage();
+        if (!user || !user.sessionExpiration) return;
+        const now = new Date();
+        const sessionExpiration = new Date(user.sessionExpiration);
+        if (sessionExpiration <= now) {
+            alert("Your session has expired. Please log in again.");
+            window.location.href = 'login.html';
         }
+    } catch (e) {
+        console.log(e)
+        window.location.href = 'login.html';
     }
 }
 
-
-// Save user score to local storage
-function saveUserToLocalStorage(user) {
-    localStorage.setItem('currentUser', JSON.stringify(user));
-}
-
-//
 function shuffle() {
     cards.forEach(card => {
         let randomPos = Math.floor(Math.random() * 12);
@@ -54,6 +82,7 @@ function shuffle() {
 }
 
 function resetGame() {
+    saveUserScore()
     shuffle();
     cards.forEach(card => {
         card.classList.remove('flip');
@@ -63,16 +92,22 @@ function resetGame() {
     setTimeout(() => {
         [hasFlippedCard, lockBoard] = [false, false];
         [firstCard, secondCard] = [null, null];
-        score = 0; // 
-        updateScore(0); // 
+        loadUserScore();
+
     }, 100);
 }
 
 
 function updateScore(points) {
     if (score + points >= 0) {
-        score += points; //
+        score += points;
         document.getElementById('score').textContent = score;
+
+        user = getUserFromLocalStorage();
+        user.memoryGameScore = score;
+        localStorage.setItem('users', JSON.stringify(users)); // Save the updated array
+        localStorage.setItem('currentUser', JSON.stringify(user)); // Update currentUser
+
     }
 }
 
