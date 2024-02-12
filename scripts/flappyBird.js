@@ -1,3 +1,5 @@
+const gameSound = new Audio("../data/sound/game-music-loop.mp3");
+
 let score = 0;
 
 const bird = document.querySelector('.bird');
@@ -16,7 +18,7 @@ let gap = 430;
 function startGame() {
     birdBottom -= gravity;
     bird.style.bottom = birdBottom + 'px';
-    bird.style.left = birdLeft + 'px';
+    bird.style.left = birdLeft + 'px';gameSound.play();
 }
 
 let gameTimerId = setInterval(startGame, 20); // invoke every 20ms
@@ -100,6 +102,7 @@ function gameOver() {
     isGameOver = true;
     document.removeEventListener('keydown', control);
     localStorage.setItem('score', JSON.stringify(score));
+    gameSound.pause();
 }
 
 // update score
