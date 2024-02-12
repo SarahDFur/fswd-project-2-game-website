@@ -35,7 +35,7 @@ function jump() {
         birdBottom += 50;
     }
     bird.style.bottom = birdBottom + 'px';
-    console.log(birdBottom);
+    // console.log(birdBottom);
 }
 document.addEventListener('keydown', control);
 
@@ -47,6 +47,7 @@ function generateObstacle() {
     let randomHeight = Math.random() * 60;
     let obstacleBottom = randomHeight; // form the bottom of the game grid
 
+    // create obstacles
     const obstacle = document.createElement('div');
     const topObstacle = document.createElement('div');
     if (!isGameOver) {
@@ -80,6 +81,9 @@ function generateObstacle() {
             gameOver();
             clearInterval(timerId); // obstacle stops on impact
         }
+        if (obstacleLeft < birdLeft) {
+            updateScore(obstacleLeft);
+        }
     }
 
     // timer for moving obstacles
@@ -95,17 +99,24 @@ function gameOver() {
     clearInterval(gameTimerId);
     isGameOver = true;
     document.removeEventListener('keydown', control);
+    localStorage.setItem('score', JSON.stringify(score));
 }
 
 // update score
-function updateScore() {
+function updateScore(obstacleLeft) {
     // check if statment
-    // if (obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 &&
-    //     (birdBottom < obstacleBottom + 153 ||
-    //         birdBottom > obstacleBottom + gap - 200)) {
-                score+=10;
-                document.getElementById('score').textContent = score;
-            // }
+    // if bird is after obstacles score += 10
+    if (obstacleLeft < 220 && obstacleLeft > 217) {
+        score += 10;
+        console.log(score);
+        document.getElementById('score').innerHTML = score;
+        return;
+    }
+    
+    // let canvas = document.getElementById("score-window");
+    // let ctx = canvas.getContext("2d");
+    // ctx.font = "16px Arial";
+    // ctx.fillStyle = "#0095DD";
+    // ctx.fillText(`Score: ${score}`, 8, 20);
 }
 
-localStorage.setItem('score', JSON.stringify(score));
