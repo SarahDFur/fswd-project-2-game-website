@@ -9,6 +9,34 @@ let score = 0;
 
 document.querySelector('.reset-button').addEventListener('click', resetGame);
 
+function getUserFromLocalStorage() {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
+}
+
+// Load user score from local storage
+function loadUserScore() {
+    const user = getUserFromLocalStorage();
+    if (user) {
+        score = user.memoryGameScore; //
+        updateScore(0);
+    }
+}
+
+function saveUserScore() {
+    const user = getUserFromLocalStorage();
+    if (user) {
+        user.memoryGameScore = score;
+        saveUserToLocalStorage(user);
+    }
+}
+
+// Save user score to local storage
+function saveUserToLocalStorage(user) {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+}
+
+//
 function shuffle() {
     cards.forEach(card => {
         let randomPos = Math.floor(Math.random() * 12);
@@ -36,6 +64,7 @@ function updateScore(points) {
     score += points; //
     document.getElementById('score').textContent = score; //
 }
+
 
 function flipCard() {
     if (lockBoard) return;
@@ -77,6 +106,7 @@ function disableCards() {
     const allFlipped = Array.from(document.querySelectorAll('.memory-card')).every(card => card.classList.contains('flip'));
     if (allFlipped) {
         winSound.play(); // play win sound
+        saveUserScore();
     }
     resetBoard();
 }
@@ -100,3 +130,8 @@ function resetBoard() {
 
 
 cards.forEach(card => card.addEventListener('click', flipCard));
+
+document.addEventListener('DOMContentLoaded', () => {
+    shuffle(); //
+    loadUserScore(); //
+});
