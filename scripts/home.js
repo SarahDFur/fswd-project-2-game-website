@@ -1,4 +1,4 @@
-import { user } from "./login.js";
+import { user } from './login.js';
 
 function getUserFromLocalStorage() {
     console.log("user at home page:" + user);
@@ -9,8 +9,8 @@ function getUserFromLocalStorage() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const user = getUserFromLocalStorage();
-    console.log(user, "2");
+    // const user = getUserFromLocalStorage();
+    console.log(user);
     if (user) {
         document.getElementById('userName').textContent += user.name;
         document.getElementById('lastLogin').textContent += new Date(user.lastSeen).toLocaleString();
