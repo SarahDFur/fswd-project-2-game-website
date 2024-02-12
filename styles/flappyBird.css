@@ -107,11 +107,7 @@ button {
     height: 300px;
     position: absolute;
 }
-canvas { 
-    background: #eee; color:#48f; 
-    width: 80px; 
-    height: 30px;
-}
+
 
 /* Keyframe for background animation */
 

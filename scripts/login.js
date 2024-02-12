@@ -1,4 +1,6 @@
 let users = JSON.parse(localStorage.getItem('users')) || [];
+let user; // user that is currently in the system
+// buttons and field variables
 let signupBtn = document.getElementById("signupBtn");
 let signinBtn = document.getElementById("signinBtn");
 let nameField = document.querySelector("#nameField input");
@@ -7,8 +9,8 @@ let passwordField = document.querySelector("#passwordField input");
 let title = document.getElementById("title");
 let loginAttempts = 0;
 
-
-signupBtn.addEventListener('click', function() {
+// 
+signupBtn.addEventListener('click', () => {
     if (title.textContent === "Sign Up") {
         addUser(nameField.value, emailField.value, passwordField.value);
     } else {
@@ -16,7 +18,7 @@ signupBtn.addEventListener('click', function() {
     }
 });
 
-signinBtn.addEventListener('click', function() {
+signinBtn.addEventListener('click', () => {
     if (title.textContent === "Sign In") {
         signIn(emailField.value, passwordField.value);
     } else {
@@ -83,7 +85,7 @@ function toggleForm() {
         signupBtn.textContent = "Switch to Sign In";
     } else {
         title.textContent = "Sign In";
-        nameField.parentElement.classList.add("hide"); // 
+        nameField.parentElement.classList.add("hide"); // problem area
         signinBtn.textContent = "Sign In";
         signupBtn.textContent = "Switch to Sign Up";
     }
