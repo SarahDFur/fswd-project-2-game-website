@@ -92,7 +92,6 @@ function generateObstacle() {
 
     // timer for moving obstacles
     let timerId = setInterval(moveObstacle, 20);
-
     // generate a new obstacle of random height every 3 seconds ↓
     if (!isGameOver) setTimeout(generateObstacle, 3000);
 }
@@ -129,8 +128,8 @@ function resetGame() {
 
     birdBottom = 100;
     birdLeft = 220; // 
-    gravity = 3;
     gap = 430;
+    gravity = 3;
 
     birdBottom -= gravity;
     bird.style.bottom = birdBottom + 'px';
@@ -156,11 +155,8 @@ function resetGame() {
 
     document.getElementById('highest-score').textContent = localStorage.getItem('score');
 
-    startGame();
-    generateObstacle();
-
-
     document.addEventListener('keydown', control);
 
-
+    startGame();
+    generateObstacle();
 }
