@@ -6,6 +6,66 @@ const bird = document.querySelector('.bird');
 const gameDisplay = document.querySelector('.game-container');
 const ground = document.querySelector('.ground');
 
+function getUserFromLocalStorage() {
+    try {
+        const userJson = localStorage.getItem('currentUser');
+        return userJson ? JSON.parse(userJson) : null;
+    } catch (e) {
+        console.log(e)
+        window.location.href = 'login.html';
+    }
+}
+// Load user score from local storage
+function loadUserScore() {
+    const currentUser = getUserFromLocalStorage();
+    if (currentUser && currentUser.flappyBirdScore !== undefined) {
+        score = currentUser.flappyBirdScore;
+        document.getElementById('score').textContent = score;
+    } else {
+        console.log('No score found for current user or current user is not defined.');
+    }
+}
+
+function saveUserScore() {
+    let currentUser = getUserFromLocalStorage(); // טען את המשתמש הנוכחי מ-localStorage
+    if (!currentUser) {
+        console.error('No current user found.');
+        return;
+    }
+
+    currentUser.flappyBirdScore = score; // עדכון ניקוד המשחק של המשתמש הנוכחי
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    const userIndex = users.findIndex(user => user.email === currentUser.email);
+    if (userIndex !== -1) {
+        users[userIndex] = currentUser; // עדכון המשתמש במערך המשתמשים
+    } else {
+        console.error('Current user not found in users array.');
+        return;
+    }
+
+    // שמירה מחדש של המשתמש הנוכחי ומערך המשתמשים ב-localStorage
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
+function checkSessionExpiration() {
+    try {
+        saveUserScore()
+        const user = getUserFromLocalStorage();
+        if (!user || !user.sessionExpiration) return;
+        const now = new Date();
+        const sessionExpiration = new Date(user.sessionExpiration);
+        if (sessionExpiration <= now) {
+            alert("Your session has expired. Please log in again.");
+            window.location.href = 'login.html';
+        }
+    } catch (e) {
+        console.log(e)
+        window.location.href = 'login.html';
+    }
+}
+
 // move bird to center of game screen
 // px changes
 let birdLeft = 220;
@@ -117,8 +177,6 @@ function gameOver() {
         document.getElementById('highest-score').innerHTML = score;
 
     }
-    let help = localStorage.getItem('score');
-    console.log("stored score:" + help);
     gameSound.pause();
 }
 
