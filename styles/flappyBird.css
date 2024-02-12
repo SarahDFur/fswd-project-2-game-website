@@ -20,12 +20,11 @@ body {
     width: 500px;
     height: 730px;
     position: absolute;
-    /* position based on parent */
-    /* center game display on screen ↓ */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 
 /* end of border styling ↑ */
 
@@ -41,7 +40,7 @@ body {
     z-index: 2;
 }
 
-.restart-btn button{
+.restart-btn button {
     top: 45%;
     right: 19%;
     transform: translate(-50%, -50%);
@@ -60,6 +59,7 @@ button {
     outline: 0;
     cursor: pointer;
 }
+
 
 /* background */
 
@@ -107,11 +107,14 @@ button {
     height: 300px;
     position: absolute;
 }
-canvas { 
-    background: #eee; color:#48f; 
-    width: 80px; 
+
+canvas {
+    background: #eee;
+    color: #48f;
+    width: 80px;
     height: 30px;
 }
+
 
 /* Keyframe for background animation */
 

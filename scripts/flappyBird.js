@@ -18,7 +18,8 @@ let gap = 430;
 function startGame() {
     birdBottom -= gravity;
     bird.style.bottom = birdBottom + 'px';
-    bird.style.left = birdLeft + 'px';gameSound.play();
+    bird.style.left = birdLeft + 'px';
+    gameSound.play();
 }
 
 let gameTimerId = setInterval(startGame, 20); // invoke every 20ms
@@ -46,7 +47,6 @@ document.addEventListener('keydown', control);
 
 // Obstacles - Yippie
 function generateObstacle() {
-
     let obstacleLeft = 500;
     let randomHeight = Math.random() * 60;
     let obstacleBottom = randomHeight; // form the bottom of the game grid
@@ -102,8 +102,11 @@ generateObstacle();
 function gameOver() {
     clearInterval(gameTimerId);
     isGameOver = true;
-    document.removeEventListener('keydown', control);
-    localStorage.setItem('score', JSON.stringify(score));
+    if (score > localStorage.getItem('score')) {
+        localStorage.setItem('score', JSON.stringify(score));
+        document.getElementById('highest-score').innerHTML = score;
+
+    }
     let help = localStorage.getItem('score');
     console.log("stored score:" + help);
     gameSound.pause();
@@ -123,5 +126,41 @@ function updateScore(obstacleLeft) {
 
 // reset game
 function resetGame() {
-    
+
+    birdBottom = 100;
+    birdLeft = 220; // 
+    gravity = 3;
+    gap = 430;
+
+    birdBottom -= gravity;
+    bird.style.bottom = birdBottom + 'px';
+    bird.style.left = birdLeft + 'px';
+
+    //
+    document.querySelectorAll('.obstacle, .topObstacle').forEach(obstacle => {
+        obstacle.remove();
+    });
+
+    score = 0;
+    document.getElementById('score').innerHTML = score;
+
+    isGameOver = false;
+    document.removeEventListener('keydown', control);
+    document.addEventListener('keydown', control);
+
+    clearInterval(gameTimerId);
+    gameTimerId = setInterval(startGame, 20);
+
+    gameSound.currentTime = 0;
+    gameSound.play();
+
+    document.getElementById('highest-score').textContent = localStorage.getItem('score');
+
+    startGame();
+    generateObstacle();
+
+
+    document.addEventListener('keydown', control);
+
+
 }
