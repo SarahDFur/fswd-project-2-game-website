@@ -17,17 +17,22 @@ function getUserFromLocalStorage() {
 // Load user score from local storage
 function loadUserScore() {
     const user = getUserFromLocalStorage();
-    if (user) {
-        score = user.memoryGameScore; //
-        updateScore(0);
+    if (user && user.memoryGameScore !== undefined) {
+        score = user.memoryGameScore; // Set score from stored value
+        updateScore(0); // Update UI
     }
 }
 
 function saveUserScore() {
     const user = getUserFromLocalStorage();
     if (user) {
-        user.memoryGameScore = score;
-        saveUserToLocalStorage(user);
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const userIndex = users.findIndex(u => u.email === user.email);
+        if (userIndex !== -1) {
+            users[userIndex].memoryGameScore = score; // Update the score
+            localStorage.setItem('users', JSON.stringify(users)); // Save updated users array
+            saveUserToLocalStorage(users[userIndex]); // Update current user in local storage
+        }
     }
 }
 
@@ -54,8 +59,6 @@ function resetGame() {
     setTimeout(() => {
         [hasFlippedCard, lockBoard] = [false, false];
         [firstCard, secondCard] = [null, null];
-        score = 0; // 
-        updateScore(0); // 
     }, 100);
 }
 

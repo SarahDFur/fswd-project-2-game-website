@@ -1,29 +1,24 @@
 let users = JSON.parse(localStorage.getItem('users')) || [];
 let signupBtn = document.getElementById("signupBtn");
 let signinBtn = document.getElementById("signinBtn");
-let nameField = document.getElementById("nameField");
-let emailField = document.getElementById("emailField");
-let passwordField = document.getElementById("passwordField");
+let nameField = document.querySelector("#nameField input");
+let emailField = document.querySelector("#emailField input");
+let passwordField = document.querySelector("#passwordField input");
 let title = document.getElementById("title");
 let loginAttempts = 0;
 
 
 signupBtn.addEventListener('click', function() {
-    const name = nameField.value;
-    const email = emailField.value;
-    const password = passwordField.value;
     if (title.textContent === "Sign Up") {
-        addUser(name, email, password);
+        addUser(nameField.value, emailField.value, passwordField.value);
     } else {
         toggleForm();
     }
 });
 
 signinBtn.addEventListener('click', function() {
-    const email = emailField.value;
-    const password = passwordField.value;
     if (title.textContent === "Sign In") {
-        signIn(email, password);
+        signIn(emailField.value, passwordField.value);
     } else {
         toggleForm();
     }
@@ -41,13 +36,14 @@ function addUser(name, email, password) {
             lastSeen: new Date().toISOString(),
             sessionExpiration: expirationTime.toISOString(),
             active: true,
-            memoryGameScore: 0, // ציון משחק זיכרון
-            flappyBirdScore: 0, // ציון פלאפי בירד
-            rockPaperScissorsScore: 0 // ציון אבן נייר ומספריים
+            memoryGameScore: 0, // 
+            flappyBirdScore: 0, // 
+            rockPaperScissorsScore: 0 // 
         };
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
         alert("User registered successfully.");
+        window.location.href = 'home.html';
     } else {
         alert("User name or email already exists. Please use different information.");
     }
@@ -61,10 +57,10 @@ function signIn(email, password) {
         const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes
         user.sessionExpiration = expirationTime.toISOString(); // update session expiration
         loginAttempts = 0; // reset login attempts
-
-        alert(`Welcome back, ${user.name}! You last logged in on ${new Date(user.lastSeen).toLocaleString()}.`);
         user.lastSeen = now.toISOString(); // update last seen
         localStorage.setItem('users', JSON.stringify(users));
+        window.location.href = 'home.html';
+
     } else {
         loginAttempts++; // increment login attempts
         if (loginAttempts >= 3) {
@@ -78,12 +74,12 @@ function signIn(email, password) {
 function toggleForm() {
     if (title.textContent === "Sign In") {
         title.textContent = "Sign Up";
-        nameField.classList.remove("hide");
-        signinBtn.textContent = "Switch to Sign In";
-        signupBtn.textContent = "Sign Up";
+        nameField.parentElement.classList.remove("hide"); // 
+        signinBtn.textContent = "Sign Up";
+        signupBtn.textContent = "Switch to Sign In";
     } else {
         title.textContent = "Sign In";
-        nameField.classList.add("hide");
+        nameField.parentElement.classList.add("hide"); // 
         signinBtn.textContent = "Sign In";
         signupBtn.textContent = "Switch to Sign Up";
     }
