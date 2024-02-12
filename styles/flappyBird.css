@@ -27,63 +27,39 @@ body {
     transform: translate(-50%, -50%);
 }
 
-
-/* borders: */
-
-
-/* .border-left {
-    width: 60px;
-    height: 790px;
-    position: absolute;
-    background-color: white;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-.border-right {
-    width: 60px;
-    height: 790px;
-    position: absolute;
-    background-color: white;
-    top: 50%;
-    right: 40%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-} */
-
-
-/* .border-top {
-    width: 500px;
-    height: 100px;
-    position: absolute;
-    background-color: white;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-.border-bottom {
-    width: 500px;
-    height: 60px;
-    position: absolute;
-    background-color: white;
-    bottom: 5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-} */
-
-
 /* end of border styling ↑ */
 
 
-/* score */
+/* score and reset styling */
 
-.score {
+.score-window {
     color: white;
+    position: absolute;
+    top: 40%;
+    right: 20%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
 
+.restart-btn button{
+    top: 45%;
+    right: 19%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 2;
+}
+
+button {
+    flex-basis: 48%;
+    background-color: rgb(50, 12, 87);
+    color: #fff;
+    height: 40px;
+    width: 70px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
 
 /* background */
 
