@@ -4,18 +4,108 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
     background: linear-gradient(135deg, #f06, #48f, #fa0);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
+    padding-left: 250px;
+    /* נותן מקום ל-navbar */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    /* שינוי לגובה מלא */
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 20px;
+    justify-content: space-between;
+    z-index: 1000;
+    /* כדי שה-navbar יהיה מעל כל האלמנטים */
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 
 /* Float four columns side by side */
 
+.logo,
+.user-info,
+.sign-button {
+    padding: 10px;
+    margin: 10px 0;
+}
+
 .column {
     float: left;
     width: 25%;
     padding: 0 10px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #61dafb;
+}
+
+.user-info {
+    display: flex;
+    font-size: 16px;
+    align-items: flex-start;
+    text-align: left;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    margin: 0.5rem 0;
+    color: #fff;
+}
+
+.user-name {
+    font-size: 1rem;
+}
+
+.last-login {
+    font-size: 0.8rem;
+}
+
+.sign-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sign-button:hover {
+    background-color: #4fa8d8;
+}
+
+.sign-button {
+    width: 100%;
+    background-color: #61dafb;
+    color: #282c34;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #4fa8d8;
 }
 
 
