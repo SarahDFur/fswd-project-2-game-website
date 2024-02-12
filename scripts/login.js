@@ -94,4 +94,4 @@ function signupToggle() {
     signinBtn.classList.add("disable");
 }
 
-module.export = { user };
+export { user };

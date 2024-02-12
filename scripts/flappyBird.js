@@ -70,7 +70,11 @@ function generateObstacle() {
 
     // moving obstacle from right to left
     function moveObstacle() {
-        obstacleLeft -= 2;
+        if (score >= 100) { // level 2
+            obstacleLeft -= 5;
+        } else { // level 1
+            obstacleLeft -= 2;
+        }
         obstacle.style.left = obstacleLeft + 'px';
         topObstacle.style.left = obstacleLeft + 'px';
         if (obstacleLeft === -60) { // when the entire obstacle is out of view
@@ -78,6 +82,7 @@ function generateObstacle() {
             gameDisplay.removeChild(obstacle); // remove from display
             gameDisplay.removeChild(topObstacle);
         }
+
         if (
             obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 &&
             (birdBottom < obstacleBottom + 150 ||
@@ -93,8 +98,13 @@ function generateObstacle() {
 
     // timer for moving obstacles
     let timerId = setInterval(moveObstacle, 20);
+    if (score >= 100 && !isGameOver) {
+        setTimeout(generateObstacle, 500); // half a second
+    } else {
+        if (!isGameOver) setTimeout(generateObstacle, 3000); // half a second
+    }
     // generate a new obstacle of random height every 3 seconds ↓
-    if (!isGameOver) setTimeout(generateObstacle, 3000);
+
 }
 generateObstacle();
 
