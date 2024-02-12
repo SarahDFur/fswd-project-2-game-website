@@ -1,8 +1,4 @@
-const score = JSON.parse(localStorage.getItem('score')) || {
-    wins: 0,
-    losses: 0,
-    ties: 0
-};
+let score = 0;
 
 const bird = document.querySelector('.bird');
 const gameDisplay = document.querySelector('.game-container');
@@ -100,3 +96,16 @@ function gameOver() {
     isGameOver = true;
     document.removeEventListener('keydown', control);
 }
+
+// update score
+function updateScore() {
+    // check if statment
+    // if (obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 &&
+    //     (birdBottom < obstacleBottom + 153 ||
+    //         birdBottom > obstacleBottom + gap - 200)) {
+                score+=10;
+                document.getElementById('score').textContent = score;
+            // }
+}
+
+localStorage.setItem('score', JSON.stringify(score));
