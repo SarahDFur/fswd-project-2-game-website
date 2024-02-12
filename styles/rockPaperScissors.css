@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f06, #48f, #fa0);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+.selections {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.selection {
+    background-color: #ddd;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 2rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.selection:hover {
+    background-color: #eee;
+    transform: scale(1.1);
+}
+
+.results {
+    text-align: center;
+}
+
+.result-score {
+    font-size: 2rem;
+    color: #333;
+    margin-left: 10px;
+}
+
+.result-selection {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.winner {
+    font-weight: bold;
+    color: green;
+}
+
+
+/* Keyframe for background animation */
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

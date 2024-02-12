@@ -8,18 +8,29 @@ body {
     height: 100vh;
     display: flex;
     background: #600;
+    background: linear-gradient(135deg, #f06, #48f, #fa0);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
 }
+
+
 /* game display : */
+
 .game-container {
     width: 500px;
     height: 730px;
-    position: absolute; /* position based on parent */
+    position: absolute;
+    /* position based on parent */
     /* center game display on screen ↓ */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-    /* borders: */
+
+
+/* borders: */
+
+
 /* .border-left {
     width: 60px;
     height: 790px;
@@ -40,6 +51,8 @@ body {
     transform: translate(-50%, -50%);
     z-index: 1;
 } */
+
+
 /* .border-top {
     width: 500px;
     height: 100px;
@@ -60,12 +73,20 @@ body {
     transform: translate(-50%, -50%);
     z-index: 1;
 } */
+
+
 /* end of border styling ↑ */
+
+
 /* score */
+
 .score {
     color: white;
 }
+
+
 /* background */
+
 .sky {
     background-image: url(../images/flappyBird/fb-game-background.png);
     width: 500px;
@@ -78,7 +99,8 @@ body {
     width: 500px;
     height: 150px;
     position: absolute;
-    top: 580px; /* position from top of parent element */
+    top: 580px;
+    /* position from top of parent element */
     z-index: 1;
 }
 
@@ -90,7 +112,9 @@ body {
     height: 45px;
 }
 
+
 /* styling obstacles */
+
 .obstacle {
     background-image: url(../images/flappyBird/flappybird-pipe.png);
     /* background-color: green; */
@@ -106,5 +130,19 @@ body {
     width: 60px;
     height: 300px;
     position: absolute;
-    
+}
+
+
+/* Keyframe for background animation */
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

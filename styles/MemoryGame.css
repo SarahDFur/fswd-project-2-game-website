@@ -11,11 +11,14 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background: linear-gradient(135deg, #f06, #48f, #fa0);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
 }
 
 .score-panel {
     color: #fff;
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -57,13 +60,17 @@ body {
     padding: 5px;
     position: absolute;
     border-radius: 1px;
-    background: #1C7CCC;
+    background: #8dc8a677;
     backface-visibility: hidden;
     transition: transform 0.5s;
 }
 
 .front-face {
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
 }
 
 .buttons-container {
@@ -83,7 +90,7 @@ body {
     margin: 5px;
     font-size: 20px;
     cursor: pointer;
-    background-color: #3498db;
+    background-color: #80afcedd;
     color: white;
     border: none;
     border-radius: 8px;
@@ -116,5 +123,20 @@ body {
     .save-score-button {
         padding: 8px 16px;
         font-size: 14px;
+    }
+}
+
+
+/* Keyframe for background animation */
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
     }
 }
