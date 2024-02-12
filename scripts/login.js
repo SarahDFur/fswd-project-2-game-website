@@ -64,7 +64,7 @@ function signIn(email, password) {
     } else {
         loginAttempts++; // increment login attempts
         if (loginAttempts >= 3) {
-            alert("Too many failed login attempts. Please try again later or verify you're not a robot.");
+            alert("Too many failed login attempts. Please try again later.");
             return;
         }
         alert("Invalid email or password.");

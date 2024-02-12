@@ -64,8 +64,10 @@ function resetGame() {
 
 
 function updateScore(points) {
-    score += points; //
-    document.getElementById('score').textContent = score; //
+    if (score + points >= 0) {
+        score += points; //
+        document.getElementById('score').textContent = score; //
+    }
 }
 
 
