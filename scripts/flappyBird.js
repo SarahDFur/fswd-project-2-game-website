@@ -20,6 +20,7 @@ function startGame() {
     bird.style.bottom = birdBottom + 'px';
     bird.style.left = birdLeft + 'px';
     gameSound.play();
+
 }
 
 let gameTimerId = setInterval(startGame, 20); // invoke every 20ms
@@ -69,7 +70,7 @@ function generateObstacle() {
 
     // moving obstacle from right to left
     function moveObstacle() {
-        if(score >= 100) { // level 2
+        if (score >= 100) { // level 2
             obstacleLeft -= 5;
         } else { // level 1
             obstacleLeft -= 2;
@@ -97,13 +98,13 @@ function generateObstacle() {
 
     // timer for moving obstacles
     let timerId = setInterval(moveObstacle, 20);
-    if (score>=100 && !isGameOver) {
-       setTimeout(generateObstacle, 500); // half a second
+    if (score >= 100 && !isGameOver) {
+        setTimeout(generateObstacle, 500); // half a second
     } else {
-        if(!isGameOver) setTimeout(generateObstacle, 3000); // half a second
+        if (!isGameOver) setTimeout(generateObstacle, 3000); // half a second
     }
     // generate a new obstacle of random height every 3 seconds ↓
-    
+
 }
 generateObstacle();
 
@@ -129,44 +130,22 @@ function updateScore(obstacleLeft) {
         score += 10;
         console.log(score);
         document.getElementById('score').innerHTML = score;
+        if (score > localStorage.getItem('highest-score')) {
+            localStorage.setItem('highest-score', score);
+            document.getElementById('highest-score').innerHTML = score;
+        }
         return;
     }
 }
 
 // reset game
 function resetGame() {
-
-    birdBottom = 100;
-    birdLeft = 220; // 
-    gap = 430;
-    gravity = 3;
-
-    birdBottom -= gravity;
-    bird.style.bottom = birdBottom + 'px';
-    bird.style.left = birdLeft + 'px';
-
-    //
-    document.querySelectorAll('.obstacle, .topObstacle').forEach(obstacle => {
-        obstacle.remove();
-    });
-
-    score = 0;
     document.getElementById('score').innerHTML = score;
-
-    isGameOver = false;
-    document.removeEventListener('keydown', control);
-    document.addEventListener('keydown', control);
-
-    clearInterval(gameTimerId);
-    gameTimerId = setInterval(startGame, 20);
-
-    gameSound.currentTime = 0;
-    // gameSound.play();
-
     document.getElementById('highest-score').textContent = localStorage.getItem('score');
+    window.location.href = 'flappyBird.html';
 
-    document.addEventListener('keydown', control);
-
-    startGame();
-    generateObstacle();
 }
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('highest-score').textContent = localStorage.getItem('score');
+    document.getElementById('score').innerHTML = '0';
+});

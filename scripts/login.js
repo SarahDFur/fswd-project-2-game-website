@@ -13,9 +13,9 @@ let loginAttempts = 0;
 // click on sign up button ↓
 signupBtn.addEventListener('click', () => {
     if (title.textContent === "Sign Up") {
-        addUser(nameFieldInput.value, emailField.value, passwordField.value); 
+        addUser(nameFieldInput.value, emailField.value, passwordField.value);
     } else {
-       signupToggle();// toggleForm();
+        signupToggle(); // toggleForm();
     }
 });
 
@@ -24,12 +24,12 @@ signinBtn.addEventListener('click', () => {
     if (title.textContent === "Sign In") {
         signIn(emailField.value, passwordField.value);
     } else {
-        signinToggle();// toggleForm();
+        signinToggle(); // toggleForm();
     }
 });
 
 // functions ↓
-function addUser(name, email, password) {  
+function addUser(name, email, password) {
     const userExists = users.some(user => user.email === email);
     if (!userExists) { // if user doesn't exist
         const now = new Date();
@@ -40,17 +40,22 @@ function addUser(name, email, password) {
             password,
             lastSeen: new Date().toISOString(),
             sessionExpiration: expirationTime.toISOString(),
-            active: true, 
+            active: true,
             // highest game scores saved until now ↓
-            memoryGameScore: 0,            
-            flappyBirdScore: 0,  
-            rockPaperScissorsScore: 0 
+            memoryGameScore: 0,
+            flappyBirdScore: 0,
+            rockPaperScissorsScore: 0
         };
         users.push(User); // append to all users
         localStorage.setItem('users', JSON.stringify(users)); 
+// =======
+//         users.push(user); // append to all users
+//         localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
+//         localStorage.setItem('users', JSON.stringify(users));
+// >>>>>>> f9228ac38d7f7de208c28f2129ab4576e8c7683d
         alert("User registered successfully.");
         window.location.href = 'home.html';
-        
+
     } else {
         alert("User name or email already exists. Please use different information.");
     }
@@ -64,10 +69,15 @@ function signIn(email, password) {
         const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes
         User.sessionExpiration = expirationTime.toISOString(); // update session expiration
         loginAttempts = 0; // reset login attempts
+
         User.lastSeen = now.toISOString(); // update last seen
+// =======
+//         user.lastSeen = now.toISOString(); // update last seen
+//         localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
+// >>>>>>> f9228ac38d7f7de208c28f2129ab4576e8c7683d
         localStorage.setItem('users', JSON.stringify(users));
         window.location.href = 'home.html';
-    } else { 
+    } else {
         loginAttempts++; // increment login attempts
         if (loginAttempts >= 3) {
             alert("Too many failed login attempts. Please try again later.");
