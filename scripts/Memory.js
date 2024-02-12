@@ -10,31 +10,35 @@ let score = 0;
 document.querySelector('.reset-button').addEventListener('click', resetGame);
 
 function getUserFromLocalStorage() {
-    const user = localStorage.getItem('currentUser') || null;
-    return user;
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
 }
 
 // Load user score from local storage
 function loadUserScore() {
     const user = getUserFromLocalStorage();
     if (user && user.memoryGameScore !== undefined) {
-        score = user.memoryGameScore; // Set score from stored value
-        updateScore(0); // Update UI
+        score = user.memoryGameScore;
+        console.log(score);
+        document.getElementById('score').textContent = score;
     }
 }
 
 function saveUserScore() {
     const user = getUserFromLocalStorage();
     if (user) {
-        const users = JSON.parse(localStorage.getItem('users')) || [];
+        user.memoryGameScore = score; // Update the score in the user object
+        // Find and update the user in the users array in localStorage
+        let users = JSON.parse(localStorage.getItem('users')) || [];
         const userIndex = users.findIndex(u => u.email === user.email);
         if (userIndex !== -1) {
-            users[userIndex].memoryGameScore = score; // Update the score
-            localStorage.setItem('users', JSON.stringify(users)); // Save updated users array
-            saveUserToLocalStorage(users[userIndex]); // Update current user in local storage
+            users[userIndex] = user; // Update the user in the array
+            localStorage.setItem('users', JSON.stringify(users)); // Save the updated array
+            localStorage.setItem('currentUser', JSON.stringify(user)); // Update currentUser
         }
     }
 }
+
 
 // Save user score to local storage
 function saveUserToLocalStorage(user) {
@@ -59,6 +63,8 @@ function resetGame() {
     setTimeout(() => {
         [hasFlippedCard, lockBoard] = [false, false];
         [firstCard, secondCard] = [null, null];
+        score = 0; // 
+        updateScore(0); // 
     }, 100);
 }
 
@@ -66,7 +72,7 @@ function resetGame() {
 function updateScore(points) {
     if (score + points >= 0) {
         score += points; //
-        document.getElementById('score').textContent = score; //
+        document.getElementById('score').textContent = score;
     }
 }
 
@@ -74,40 +80,36 @@ function updateScore(points) {
 function flipCard() {
     if (lockBoard) return;
     if (this === firstCard) return;
-
     this.classList.add('flip');
-
     if (!hasFlippedCard) {
         // first click
         hasFlippedCard = true;
         firstCard = this;
-
         return;
     }
-
     // second click
     secondCard = this;
-
     checkForMatch();
 }
 
 function checkForMatch() {
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
     if (isMatch) {
         disableCards();
+        console.log('match');
         updateScore(10);
         matchSound.play(); // play match sound
     } else {
         unflipCards();
+        console.log('unmatch');
         updateScore(-1);
     }
 }
 
+
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
-
     const allFlipped = Array.from(document.querySelectorAll('.memory-card')).every(card => card.classList.contains('flip'));
     if (allFlipped) {
         winSound.play(); // play win sound
@@ -118,11 +120,9 @@ function disableCards() {
 
 function unflipCards() {
     lockBoard = true;
-
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
-
         resetBoard();
     }, 1500);
 }

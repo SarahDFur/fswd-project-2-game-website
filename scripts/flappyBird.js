@@ -141,7 +141,7 @@ function updateScore(obstacleLeft) {
 // reset game
 function resetGame() {
     document.getElementById('score').innerHTML = score;
-    document.getElementById('highest-score').textContent = localStorage.getItem('score');
+    document.getElementById('highest-score').textContent = (JSON.parse(localStorage.getItem('currentUser'))).flappyBirdScore;
     window.location.href = 'flappyBird.html';
 
 }

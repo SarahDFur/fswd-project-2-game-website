@@ -34,25 +34,22 @@ function addUser(name, email, password) {
     if (!userExists) { // if user doesn't exist
         const now = new Date();
         const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes - "cookies"
-        User = {
+        user = {
             name,
             email,
             password,
             lastSeen: new Date().toISOString(),
             sessionExpiration: expirationTime.toISOString(),
             active: true,
-            // highest game scores saved until now ↓
             memoryGameScore: 0,
             flappyBirdScore: 0,
             rockPaperScissorsScore: 0
         };
-        users.push(User); // append to all users
-        localStorage.setItem('users', JSON.stringify(users)); 
-// =======
-//         users.push(user); // append to all users
-//         localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
-//         localStorage.setItem('users', JSON.stringify(users));
-// >>>>>>> f9228ac38d7f7de208c28f2129ab4576e8c7683d
+        //       users.push(User); // append to all users
+        //       localStorage.setItem('users', JSON.stringify(users)); 
+        //        users.push(user); // append to all users
+        localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
+        //       localStorage.setItem('users', JSON.stringify(users));
         alert("User registered successfully.");
         window.location.href = 'home.html';
 
@@ -63,18 +60,16 @@ function addUser(name, email, password) {
 
 
 function signIn(email, password) {
-    User = users.find(user => user.email === email && user.password === password);
-    if (User) {
+    user = users.find(user => user.email === email && user.password === password);
+    log()
+    if (user) {
         const now = new Date();
-        const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes
-        User.sessionExpiration = expirationTime.toISOString(); // update session expiration
+        const expirationTime = new Date(now.getTime() + 30 * 60000);
+        user.sessionExpiration = expirationTime.toISOString();
         loginAttempts = 0; // reset login attempts
 
-        User.lastSeen = now.toISOString(); // update last seen
-// =======
-//         user.lastSeen = now.toISOString(); // update last seen
-//         localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
-// >>>>>>> f9228ac38d7f7de208c28f2129ab4576e8c7683d
+        user.lastSeen = now.toISOString(); // update last seen
+        localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
         localStorage.setItem('users', JSON.stringify(users));
         window.location.href = 'home.html';
     } else {
