@@ -11,13 +11,18 @@
 
 <body>
     <div class="score-window">
-        Score: <span id="score">0</span>
+        <div>
+            highest Score: <span id="highest-score">0</span>
+        </div>
+        <div>
+            Score: <span id="score">0</span>
+        </div>
     </div>
     <div class="restart-btn">
-        <button>Restart</button>
+        <button onclick="resetGame()">reset</button>
     </div>
     <div class="game-container">
-        
+
         <div class="sky">
             <div class="bird"></div>
         </div>
