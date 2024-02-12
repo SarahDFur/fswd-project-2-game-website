@@ -29,7 +29,7 @@ function addUser(name, email, password) {
     if (!userExists) {
         const now = new Date();
         const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes
-        const newUser = {
+        const user = {
             name,
             email,
             password,
@@ -40,9 +40,12 @@ function addUser(name, email, password) {
             flappyBirdScore: 0, // 
             rockPaperScissorsScore: 0 // 
         };
-        users.push(newUser);
+        users.push(user);
         localStorage.setItem('users', JSON.stringify(users));
         alert("User registered successfully.");
+        console.log(users)
+
+
         window.location.href = 'home.html';
     } else {
         alert("User name or email already exists. Please use different information.");
@@ -60,7 +63,8 @@ function signIn(email, password) {
         user.lastSeen = now.toISOString(); // update last seen
         localStorage.setItem('users', JSON.stringify(users));
         window.location.href = 'home.html';
-
+        console.log(user)
+        console.log(users)
     } else {
         loginAttempts++; // increment login attempts
         if (loginAttempts >= 3) {

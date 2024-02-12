@@ -1,10 +1,13 @@
 function getUserFromLocalStorage() {
-    const user = localStorage.getItem('currentUser');
+    const user = localStorage.getItem('user');
+    console.log(user, "3")
+
     return user ? JSON.parse(user) : null;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const user = getUserFromLocalStorage();
+    console.log(user, "2")
     if (user) {
         document.getElementById('userName').textContent += user.name;
         document.getElementById('lastLogin').textContent += new Date(user.lastSeen).toLocaleString();
@@ -28,6 +31,8 @@ function getUserFromLocalStorage() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const user = getUserFromLocalStorage();
+    console.log(user, "1")
+
     if (user) {
         // אם יש משתמש שמור, הצג את הפרטים שלו ב-navbar
         document.querySelector('.user-name').textContent = `Username: ${user.name}`;

@@ -10,8 +10,8 @@ let score = 0;
 document.querySelector('.reset-button').addEventListener('click', resetGame);
 
 function getUserFromLocalStorage() {
-    const user = localStorage.getItem('currentUser');
-    return user ? JSON.parse(user) : null;
+    const user = localStorage.getItem('currentUser') || null;
+    return user;
 }
 
 // Load user score from local storage
