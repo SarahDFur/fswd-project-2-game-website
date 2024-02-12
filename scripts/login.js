@@ -1,5 +1,5 @@
 let users = JSON.parse(localStorage.getItem('users')) || [];
-let user; // user that is currently in the system
+let User; // user that is currently in the system
 // buttons and field variables
 let signupBtn = document.getElementById("signupBtn");
 let signinBtn = document.getElementById("signinBtn");
@@ -34,7 +34,7 @@ function addUser(name, email, password) {
     if (!userExists) { // if user doesn't exist
         const now = new Date();
         const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes - "cookies"
-        user = {
+        User = {
             name,
             email,
             password,
@@ -46,7 +46,7 @@ function addUser(name, email, password) {
             flappyBirdScore: 0,  
             rockPaperScissorsScore: 0 
         };
-        users.push(user); // append to all users
+        users.push(User); // append to all users
         localStorage.setItem('users', JSON.stringify(users)); 
         alert("User registered successfully.");
         window.location.href = 'home.html';
@@ -58,13 +58,13 @@ function addUser(name, email, password) {
 
 
 function signIn(email, password) {
-    user = users.find(user => user.email === email && user.password === password);
-    if (user) {
+    User = users.find(user => user.email === email && user.password === password);
+    if (User) {
         const now = new Date();
         const expirationTime = new Date(now.getTime() + 30 * 60000); // 30 minutes
-        user.sessionExpiration = expirationTime.toISOString(); // update session expiration
+        User.sessionExpiration = expirationTime.toISOString(); // update session expiration
         loginAttempts = 0; // reset login attempts
-        user.lastSeen = now.toISOString(); // update last seen
+        User.lastSeen = now.toISOString(); // update last seen
         localStorage.setItem('users', JSON.stringify(users));
         window.location.href = 'home.html';
     } else { 
@@ -92,4 +92,4 @@ function signupToggle() {
     signinBtn.classList.add("disable");
 }
 
-export { user };
+// export { user };
