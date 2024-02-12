@@ -10,7 +10,16 @@ body {
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     padding-left: 250px;
-    /* נותן מקום ל-navbar */
+}
+
+.navbar .logo {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 24px;
+    background: -webkit-linear-gradient(45deg, #f06, #48f, #fa0);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-decoration: none;
+    margin-bottom: 20px;
 }
 
 .navbar {
@@ -19,7 +28,6 @@ body {
     left: 0;
     width: 250px;
     height: 100vh;
-    /* שינוי לגובה מלא */
     background-color: #333;
     color: #fff;
     display: flex;
@@ -28,7 +36,6 @@ body {
     padding: 20px;
     justify-content: space-between;
     z-index: 1000;
-    /* כדי שה-navbar יהיה מעל כל האלמנטים */
 }
 
 .navbar-container {
@@ -43,17 +50,23 @@ body {
 
 /* Float four columns side by side */
 
-.logo,
-.user-info,
-.sign-button {
-    padding: 10px;
-    margin: 10px 0;
+.user-info {
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user-info .user-name,
+.user-info .last-login {
+    font-size: 16px;
+    margin: 5px 0;
 }
 
 .column {
     float: left;
-    width: 25%;
-    padding: 0 10px;
+    width: calc(25% - 20px);
+    padding: 10px;
 }
 
 .logo {
@@ -82,37 +95,16 @@ body {
     font-size: 0.8rem;
 }
 
-.sign-buttons {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.sign-button:hover {
-    background-color: #4fa8d8;
-}
-
-.sign-button {
-    width: 100%;
-    background-color: #61dafb;
-    color: #282c34;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.button:hover {
-    background-color: #4fa8d8;
-}
-
 
 /* Remove extra left and right margins, due to padding in columns */
 
 .row {
     margin: 0 -5px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px auto;
 }
 
 
@@ -139,7 +131,7 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 240px;
     height: 320px;
-    margin: 10px;
+    margin: 5px;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -181,10 +173,6 @@ img {
     width: 60%;
     height: auto;
     border-radius: 2px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
 }
 
 .card:hover img {
@@ -195,7 +183,7 @@ img {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     font-size: 60px;
     text-align: center;
-    background: -webkit-linear-gradient(45deg, #f06, #48f);
+    background: -webkit-linear-gradient(45deg, #f06, rgb(238, 245, 49));
     -webkit-background-clip: text;
     color: transparent;
     margin-bottom: 20px;
