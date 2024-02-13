@@ -12,42 +12,6 @@ body {
     padding-left: 250px;
 }
 
-.navbar .logo {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    font-size: 24px;
-    background: -webkit-linear-gradient(45deg, #f06, #48f, #fa0);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-decoration: none;
-    margin-bottom: 20px;
-}
-
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: 20px;
-    justify-content: space-between;
-    z-index: 1000;
-}
-
-.navbar-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-
 /* Float four columns side by side */
 
 .user-info {
