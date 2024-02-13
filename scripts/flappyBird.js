@@ -182,7 +182,7 @@ function gameOver() {
 function updateScore(obstacleLeft) {
     // check if statment
     // if bird is after obstacles score += 10
-    if (obstacleLeft < 220 && obstacleLeft > 217) {
+    if (obstacleLeft < 220 && obstacleLeft > 217 || (score >= 100 && obstacleLeft < 220 && obstacleLeft > 210)) {
         score += 10;
         console.log(score);
         document.getElementById('score').innerHTML = score;
