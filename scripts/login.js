@@ -32,7 +32,8 @@ signinBtn.addEventListener('click', () => {
 function addUser(name, email, password) {
     users = JSON.parse(localStorage.getItem('users')) || [];
     const userExists = users.some(user => user.email === email);
-    if (!userExists) {
+    if (!userExists)
+     {
         const newUser = {
             name,
             email,

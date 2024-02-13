@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     document.querySelector('.user-name').textContent = `Username: ${user.name}`;
     document.querySelector('.last-login').textContent = `Last Login: ${new Date(user.lastSeen).toLocaleString()}`;
+    document.querySelector('.flappy-bird-score').textContent = `Flappy Bird Score: ${user.flappyBirdScore}`;
+    document.querySelector('.memory-game-score').textContent = `Memory Game Score: ${user.memoryGameScore}`;
+    document.querySelector('.rock-paper-scissors-score').textContent = `Rock Paper Scissors Score: ${user.rockPaperScissorsScore}`;
     if (user) {
         document.getElementById('userName').textContent += user.name;
         document.getElementById('lastLogin').textContent += new Date(user.lastSeen).toLocaleString();
@@ -20,7 +23,6 @@ document.querySelectorAll('.game-title').forEach(game => {
             e.preventDefault(); //
             alert('Please sign in or sign up to play the game.');
             window.location.href = 'login.html'; // 
-            window.location.href = 'login.html'; //
         }
     });
 });

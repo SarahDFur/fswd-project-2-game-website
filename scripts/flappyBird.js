@@ -32,19 +32,17 @@ function saveUserScore() {
         console.error('No current user found.');
         return;
     }
-
     currentUser.flappyBirdScore = score; // עדכון ניקוד המשחק של המשתמש הנוכחי
 
     let users = JSON.parse(localStorage.getItem('users')) || [];
     const userIndex = users.findIndex(user => user.email === currentUser.email);
     if (userIndex !== -1) {
-        users[userIndex] = currentUser; // עדכון המשתמש במערך המשתמשים
+        users[userIndex] = currentUser;    
     } else {
         console.error('Current user not found in users array.');
         return;
     }
 
-    // שמירה מחדש של המשתמש הנוכחי ומערך המשתמשים ב-localStorage
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     localStorage.setItem('users', JSON.stringify(users));
 }
@@ -188,8 +186,9 @@ function updateScore(obstacleLeft) {
         score += 10;
         console.log(score);
         document.getElementById('score').innerHTML = score;
-        if (score > localStorage.getItem('highest-score')) {
-            localStorage.setItem('highest-score', score);
+        if (score >  (JSON.parse(localStorage.getItem('currentUser'))).flappyBirdScore||score> localStorage.getItem('score') )
+         {
+            saveUserScore()
             document.getElementById('highest-score').innerHTML = score;
         }
         return;
@@ -204,6 +203,6 @@ function resetGame() {
 
 }
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('highest-score').textContent = localStorage.getItem('score');
+    document.getElementById('highest-score').textContent = (JSON.parse(localStorage.getItem('currentUser'))).flappyBirdScore;
     document.getElementById('score').innerHTML = '0';
 });
