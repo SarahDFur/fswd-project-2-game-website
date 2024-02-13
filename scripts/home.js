@@ -4,17 +4,23 @@ function getUserFromLocalStorage() {
     return user;
 }
 document.addEventListener('DOMContentLoaded', () => {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    document.querySelector('.user-name').textContent = `Username: ${user.name}`;
-    document.querySelector('.last-login').textContent = `Last Login: ${new Date(user.lastSeen).toLocaleString()}`;
-    document.querySelector('.flappy-bird-score').textContent = `Flappy Bird Score: ${user.flappyBirdScore}`;
-    document.querySelector('.memory-game-score').textContent = `Memory Game Score: ${user.memoryGameScore}`;
-    document.querySelector('.rock-paper-scissors-score').textContent = `Rock Paper Scissors Score: ${user.rockPaperScissorsScore}`;
+    const user = getUserFromLocalStorage();
     if (user) {
-        document.getElementById('userName').textContent += user.name;
-        document.getElementById('lastLogin').textContent += new Date(user.lastSeen).toLocaleString();
+        // Update UI with user information
+        document.querySelector('.user-name').textContent += ` ${user.name}`;
+        document.querySelector('.last-login').textContent += ` ${new Date(user.lastSeen).toLocaleString()}`;
+        document.querySelector('.memory-game-score').textContent += ` ${user.memoryGameScore}`;
+        document.querySelector('.flappy-bird-score').textContent += ` ${user.flappyBirdScore}`;
+        document.querySelector('.rock-paper-scissors-score').textContent += ` ${user.rockPaperScissorsScore}`;
+        
+        // Check for session expiration
+        checkSessionExpiration(user);
+    } else {
+        // Redirect to login if no user data is found
+        window.location.href = 'login.html';
     }
 });
+
 document.querySelectorAll('.game-title').forEach(game => {
     game.addEventListener('click', (e) => {
         const user = getUserFromLocalStorage();
@@ -31,6 +37,7 @@ function getUserFromLocalStorage() {
     return JSON.parse(localStorage.getItem('currentUser'));
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
     user = JSON.parse(localStorage.getItem('currentUser'));
     console.log(user);
@@ -43,4 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function logout() {
     localStorage.removeItem('currentUser');
     window.location.href = 'login.html'; // 
+}
+
+function checkSessionExpiration(user) {
+    const now = new Date();
+    const sessionExpiration = new Date(user.sessionExpiration);
+    if (sessionExpiration < now) {
+        alert('Your session has expired. Please log in again.');
+        window.location.href = 'login.html';
+    }
 }
