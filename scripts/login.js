@@ -1,10 +1,11 @@
+// Initialize variables and load users from localStorage
 let users = JSON.parse(localStorage.getItem('users')) || [];
-let User; // user that is currently in the system
-// buttons and field variables
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+// Elements from the document
 let signupBtn = document.getElementById("signupBtn");
 let signinBtn = document.getElementById("signinBtn");
-let nameField = document.getElementById("nameField"); // for styling
-let nameFieldInput = document.querySelector("#nameField input"); // for passing input
+let nameFieldInput = document.querySelector("#nameField input");
 let emailField = document.querySelector("#emailField input");
 let passwordField = document.querySelector("#passwordField input");
 let title = document.getElementById("title");
@@ -29,11 +30,11 @@ signinBtn.addEventListener('click', () => {
 });
 
 // functions 
+// Function to add a new user
 function addUser(name, email, password) {
-    users = JSON.parse(localStorage.getItem('users')) || [];
+    // Check if user already exists
     const userExists = users.some(user => user.email === email);
-    if (!userExists)
-     {
+    if (!userExists) {
         const newUser = {
             name,
             email,
@@ -45,9 +46,9 @@ function addUser(name, email, password) {
             flappyBirdScore: 0,
             rockPaperScissorsScore: 0
         };
-        users.push(newUser); 
-        localStorage.setItem('users', JSON.stringify(users)); 
-        localStorage.setItem('currentUser', JSON.stringify(newUser)); 
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
         alert("User registered successfully.");
         window.location.href = 'home.html';
     } else {
@@ -56,23 +57,23 @@ function addUser(name, email, password) {
 }
 
 // sign in function
-
+// Function for user sign-in
 function signIn(email, password) {
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    let user = users.find(user => user.email === email && user.password === password);
+    const user = users.find(user => user.email === email && user.password === password);
     if (user) {
-        const now = new Date();
-        user.lastSeen = now.toISOString();
-        user.sessionExpiration = new Date(now.getTime() + 30 * 60000).toISOString();
-        localStorage.setItem('currentUser', JSON.stringify(user)); // עדכון המשתמש הנוכחי בלבד
+        user.lastSeen = new Date().toISOString();
+        user.sessionExpiration = new Date(new Date().getTime() + 30 * 60000).toISOString();
+        localStorage.setItem('currentUser', JSON.stringify(user));
         alert("Logged in successfully.");
-        loginAttempts = 0; // reset login attempts  
-        localStorage.setItem('users', JSON.stringify(user));
         window.location.href = 'home.html';
     } else {
-        loginAttempts++; // increment login attempts
+        loginAttempts++;
         if (loginAttempts >= 3) {
+            // Freeze the page for a minute if there are more than 3 failed login attempts
             alert("Too many failed login attempts. Please try again later.");
+            setTimeout(() => {
+                loginAttempts = 0; // Reset the login attempts after a minute
+            }, 60000);
             return;
         }
         alert("Invalid email or password.");
@@ -80,20 +81,24 @@ function signIn(email, password) {
 }
 
 // click functions:
+// Toggle functions for switching between sign up and sign in
 function signinToggle() {
-    nameField.style.maxHeight = "0px"; // hide name field
-    title.innerHTML = "Sign In"; // change title
-    signupBtn.classList.add("disable"); // add classname disable to this button everytime we click on sign in
+    // Switch to sign in mode
+    nameField.style.maxHeight = "0px";
+    title.innerHTML = "Sign In";
+    signupBtn.classList.add("disable");
     signinBtn.classList.remove("disable");
 }
 
 function signupToggle() {
-    nameField.style.maxHeight = "60px"; // hide name field
-    title.innerHTML = "Sign Up"; // change title
-    signupBtn.classList.remove("disable"); // add classname disable to this button everytime we click on sign up
+    // Switch to sign up mode
+    nameField.style.maxHeight = "60px";
+    title.innerHTML = "Sign Up";
+    signupBtn.classList.remove("disable");
     signinBtn.classList.add("disable");
 }
 
+// Load users from localStorage when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     users = JSON.parse(localStorage.getItem('users')) || [];
 });
