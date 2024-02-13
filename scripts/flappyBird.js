@@ -157,7 +157,7 @@ function generateObstacle() {
     // timer for moving obstacles
     let timerId = setInterval(moveObstacle, 20);
     if (score >= 100 && !isGameOver) {
-        setTimeout(generateObstacle, 500); // half a second
+        setTimeout(generateObstacle, 1000); // half a second
     } else {
         if (!isGameOver) setTimeout(generateObstacle, 3000); // half a second
     }
