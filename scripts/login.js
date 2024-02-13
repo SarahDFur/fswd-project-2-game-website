@@ -1,5 +1,5 @@
 // Initialize variables and load users from localStorage
-let users = JSON.parse(localStorage.getItem('users')) || [];
+let users = loadOrInitializeUsers();
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 // Elements from the document
@@ -10,6 +10,23 @@ let emailField = document.querySelector("#emailField input");
 let passwordField = document.querySelector("#passwordField input");
 let title = document.getElementById("title");
 let loginAttempts = 0;
+
+function loadOrInitializeUsers() {
+    let users;
+    try {
+        users = JSON.parse(localStorage.getItem('users'));
+    } catch (error) {
+        console.error('Error parsing users from localStorage:', error);
+    }
+    
+    if (!Array.isArray(users)) {
+        console.log('Initializing users as an empty array.');
+        users = [];
+        localStorage.setItem('users', JSON.stringify(users));
+    }
+    
+    return users;
+}
 
 // click on sign up button 
 signupBtn.addEventListener('click', () => {
