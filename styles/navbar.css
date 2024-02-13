@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
     color: black;
     background-color: white;
     margin: 0;
     padding: 0;
+    margin-left: 200px;
 }
 
 .navbar .logo {
@@ -16,19 +19,21 @@ body {
 }
 
 .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100vh;
-    background-color: #333;
-    color: #fff;
+    background-color: rgba(51, 51, 51, 0.9); /* רקע שקוף */
+    backdrop-filter: blur(5px); /* אפקט טשטוש לרקע, עובד בדפדפנים חדשים */
+    color: #ffffff71;
+    font-family: 'Open Sans', sans-serif;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    padding: 20px;
-    justify-content: space-between;
-    z-index: 1000;
+    justify-content: start;
+    align-items: center;
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
 .navbar-container {
@@ -50,4 +55,23 @@ body {
     font-size: 1.5rem;
     letter-spacing: 0.3ch;
     width: 100%;
+}
+
+
+.user-info {
+    text-align: center;
+    width: 100%;
+    font-size: 0.9em;
+    color: #dddddd;
+    margin-top: 20px;
+    align-items: center; 
+    font-family: 'Roboto', sans-serif;
+}
+
+.user-info div {
+    margin: 5px 0;
+}
+.user-name, .last-login {
+    font-weight: 700; 
+    font-size: 18px; 
 }

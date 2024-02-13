@@ -44,9 +44,9 @@ function addUser(name, email, password) {
             flappyBirdScore: 0,
             rockPaperScissorsScore: 0
         };
-        users.push(newUser); // הוסף את המשתמש החדש למערך
-        localStorage.setItem('users', JSON.stringify(users)); // שמור את המערך המעודכן
-        localStorage.setItem('currentUser', JSON.stringify(newUser)); // עדכון המשתמש הנוכחי
+        users.push(newUser); 
+        localStorage.setItem('users', JSON.stringify(users)); 
+        localStorage.setItem('currentUser', JSON.stringify(newUser)); 
         alert("User registered successfully.");
         window.location.href = 'home.html';
     } else {

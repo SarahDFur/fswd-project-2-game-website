@@ -101,9 +101,7 @@ function updateScore(points) {
 
         user = getUserFromLocalStorage();
         user.memoryGameScore = score;
-        localStorage.setItem('users', JSON.stringify(users)); // Save the updated array
         localStorage.setItem('currentUser', JSON.stringify(user)); // Update currentUser
-
     }
 }
 
