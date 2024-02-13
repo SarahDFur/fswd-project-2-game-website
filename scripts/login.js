@@ -10,7 +10,7 @@ let passwordField = document.querySelector("#passwordField input");
 let title = document.getElementById("title");
 let loginAttempts = 0;
 
-// click on sign up button ↓
+// click on sign up button 
 signupBtn.addEventListener('click', () => {
     if (title.textContent === "Sign Up") {
         addUser(nameFieldInput.value, emailField.value, passwordField.value);
@@ -19,7 +19,7 @@ signupBtn.addEventListener('click', () => {
     }
 });
 
-// click on sign in button ↓
+// click on sign in button 
 signinBtn.addEventListener('click', () => {
     if (title.textContent === "Sign In") {
         signIn(emailField.value, passwordField.value);
@@ -28,9 +28,9 @@ signinBtn.addEventListener('click', () => {
     }
 });
 
-// functions ↓
+// functions 
 function addUser(name, email, password) {
-    users = JSON.parse(localStorage.getItem('users')); //|| [];
+    users = JSON.parse(localStorage.getItem('users')) || [];
     const userExists = users.some(user => user.email === email);
     if (!userExists) {
         const newUser = {

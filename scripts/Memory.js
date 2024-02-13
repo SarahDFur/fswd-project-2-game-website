@@ -35,24 +35,20 @@ function loadUserScore() {
 
 
 function saveUserScore() {
-    let currentUser = getUserFromLocalStorage(); // טען את המשתמש הנוכחי מ-localStorage
+    let currentUser = getUserFromLocalStorage();
     if (!currentUser) {
         console.error('No current user found.');
         return;
     }
-
-    currentUser.memoryGameScore = score; // עדכון ניקוד המשחק של המשתמש הנוכחי
-
+    currentUser.memoryGameScore = score;
     let users = JSON.parse(localStorage.getItem('users')) || [];
     const userIndex = users.findIndex(user => user.email === currentUser.email);
     if (userIndex !== -1) {
-        users[userIndex] = currentUser; // עדכון המשתמש במערך המשתמשים
+        users[userIndex] = currentUser;
     } else {
         console.error('Current user not found in users array.');
         return;
     }
-
-    // שמירה מחדש של המשתמש הנוכחי ומערך המשתמשים ב-localStorage
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     localStorage.setItem('users', JSON.stringify(users));
 }
